@@ -1,9 +1,9 @@
-import { Platform } from 'react-native'
+import { Platform, ActivityIndicator } from 'react-native'
 import {
-    Background, 
-    Container, 
-    Logo, 
-    AreaInput, 
+    Background,
+    Container,
+    Logo,
+    AreaInput,
     Input,
     SubmitButton,
     SubmitText,
@@ -11,13 +11,22 @@ import {
     LinkText
 } from '../SignIn/styles'
 import { useNavigation } from '@react-navigation/native'
+import { useContext, useState } from 'react'
+import { AuthContext } from '../../contexts/auth'
 
 export default function SignIn() {
     const navigation = useNavigation()
+    const { signIn, loading } = useContext(AuthContext)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    function handleLogin(){
+        signIn(email, password)
+    }
 
     return (
         <Background>
-            <Container 
+            <Container
                 behavior={Platform.OS === 'ios' ? 'paddiing' : ''}
                 enabled
             >
@@ -27,20 +36,30 @@ export default function SignIn() {
                 <AreaInput>
                     <Input
                         placeholder='Digite seu email'
+                        value={email}
+                        onChangeText={(text) => setEmail(text)}
                     />
                 </AreaInput>
 
                 <AreaInput>
                     <Input
                         placeholder='Digite sua senha'
+                        value={password}
+                        onChangeText={(text) => setPassword(text)}
                     />
                 </AreaInput>
 
-                <SubmitButton activeOpacity={0.8}>
-                    <SubmitText>Acessar conta</SubmitText>
+                <SubmitButton activeOpacity={0.8} onPress={handleLogin}>
+                    {
+                        loading ? (
+                            <ActivityIndicator size={20} color="#FFF" />
+                        ) : (
+                            <SubmitText>Acessar</SubmitText>
+                        )
+                    }
                 </SubmitButton>
 
-                <Link onPress={ () => navigation.navigate('SignUp')}>
+                <Link onPress={() => navigation.navigate('SignUp')}>
                     <LinkText>Crie uma conta !</LinkText>
                 </Link>
             </Container>

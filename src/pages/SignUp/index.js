@@ -1,13 +1,12 @@
+import styled from "styled-components/native";
 import { ActivityIndicator, Platform } from 'react-native'
-import {
-    Background,
-    AreaInput,
-    Input,
-    SubmitButton,
+import { 
+    Background, 
+    AreaInput, 
+    Input, 
+    SubmitButton, 
     SubmitText
-} from '../SignIn/styles'
-import { useNavigation } from '@react-navigation/native'
-import styled from 'styled-components/native'
+  } from '../SignIn/styles';
 import { useContext, useState } from 'react'
 import { AuthContext } from '../../contexts/auth'
 
@@ -17,9 +16,7 @@ export default function SignUp() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    function handleSignUp() {
-        if(nome === '' || email === '' || password === '') return
-        
+    function handleSignUp() {        
         signUp(nome, email, password)
     }
 
@@ -71,7 +68,7 @@ export default function SignUp() {
 }
 
 const Titulo = styled.Text`
-  font-size: 23;
+  font-size: 20px;
   color:rgb(97, 97, 97);
   margin-top: 100px;
   margin-bottom: 60px;
