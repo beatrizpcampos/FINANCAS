@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import api from '../services/api'
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const AuthContext = createContext({})
 
@@ -48,6 +49,8 @@ function AuthProvider({ children }){
                 email
             }
 
+            await AsyncStorage.setItem('@finToken', token)
+            
             api.defaults.headers['Authorization'] = `Bearer ${token}`
 
             setUser({
