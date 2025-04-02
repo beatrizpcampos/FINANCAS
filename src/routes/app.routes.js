@@ -1,14 +1,15 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Home from "../pages/Home";
+import Register from "../pages/Register";
 
 const AppDrawer = createDrawerNavigator()
 
-function AppRoutes(){
-    return(
+function AppRoutes() {
+    return (
         <AppDrawer.Navigator
             screenOptions={{
                 headerShown: false,
-                
+
                 drawerStyle: {
                     backgroundColor: '#fff',
                     paddingTop: 20
@@ -24,6 +25,11 @@ function AppRoutes(){
             <AppDrawer.Screen
                 name="Home"
                 component={Home}
+            />
+
+            <AppDrawer.Screen
+                name="Register"
+                component={Register}
             />
         </AppDrawer.Navigator>
     )
