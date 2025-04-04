@@ -25,7 +25,7 @@ export default function RegisterTypes({ type, sendTypeChanged }) {
             >
                 <Icon name='arrow-up' size={25} color='#121212' />
                 <RegisterLabel>
-                    Receita
+                    Entrada
                 </RegisterLabel>
             </RegisterTypeButton>
 
@@ -35,7 +35,7 @@ export default function RegisterTypes({ type, sendTypeChanged }) {
             >
                 <Icon name='arrow-down' size={25} color='#121212' />
                 <RegisterLabel>
-                    Despesa
+                    Saida
                 </RegisterLabel>
             </RegisterTypeButton>
 

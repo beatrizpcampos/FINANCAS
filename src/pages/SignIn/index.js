@@ -46,6 +46,7 @@ export default function SignIn() {
                         placeholder='Digite sua senha'
                         value={password}
                         onChangeText={(text) => setPassword(text)}
+                        secureTextEntry={true}
                     />
                 </AreaInput>
 
@@ -60,7 +61,7 @@ export default function SignIn() {
                 </SubmitButton>
 
                 <Link onPress={() => navigation.navigate('SignUp')}>
-                    <LinkText>Crie uma conta !</LinkText>
+                    <LinkText>Ainda nao tem conta ? Criar agora</LinkText>
                 </Link>
             </Container>
         </Background>

@@ -10,16 +10,16 @@ export default function CustomDrawer(props) {
             <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 25 }}>
                 <Image
                     source={require('../../assets/logo.png')}
-                    style={{ width: 90, height: 90 }}
+                    style={{ width: 100, height: 100 }}
                     resizeMode='contain'
                 />
 
-                <Text style={{ fontSize: 18, marginTop: 14 }}>
+                <Text style={{ fontSize: 20, marginTop: 20, color: 'rgb(65, 64, 64)' }}>
                     Bem vindo(a)
                 </Text>
 
                 <Text
-                    style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 14, paddingHorizontal: 20 }}
+                    style={{ fontSize: 18, fontWeight: 500, color: 'rgb(65, 64, 64)', marginBottom: 14, paddingHorizontal: 20 }}
                     numberOfLines={1}
                 >
                     {user && user.name}
@@ -31,12 +31,13 @@ export default function CustomDrawer(props) {
             <DrawerItem
                 {...props}
                 label='Sair'
+                labelStyle={{ color: '#ffffff'}}
                 onPress={() => signOut()}
                 style={{ 
-                    borderWidth: 1, 
-                    borderColor: '#c62c36', 
+                    backgroundColor: '#FF6347', 
                     marginVertical: 10 ,
-                    borderRadius: 5
+                    marginHorizontal: 15,
+                    borderRadius: 10
                 }}
             />
 

@@ -1,6 +1,6 @@
-import { Background, Input, SubmitButton, SubmitText } from './styles';
+import { Background, Input, SubmitButton, SubmitText, TitleInput } from './styles';
 import Header from '../../components/Header';
-import { TouchableWithoutFeedback, SafeAreaView, Keyboard, Alert } from 'react-native';
+import { TouchableWithoutFeedback, SafeAreaView, Keyboard, Alert, Text } from 'react-native';
 import { useState } from 'react';
 import RegisterTypes from '../../components/RegisterTypes';
 import api from '../../services/api';
@@ -16,14 +16,14 @@ export default function Register() {
     function Submit() {
         Keyboard.dismiss()
 
-        if(isNaN(parseFloat(valueInput)) || type === null){
+        if (isNaN(parseFloat(valueInput)) || type === null) {
             alert('Preencha todos os campos corretamente')
             return
         }
 
         Alert.alert(
-            'Confirmando dados',
-            `Tipo ${type} - Valor: ${parseFloat(valueInput)}`,
+            'Confirma esse registro ?',
+            `${type} no valor de: R$ ${parseFloat(valueInput)} reais`,
             [
                 {
                     text: 'Cancelar',
@@ -53,28 +53,37 @@ export default function Register() {
     }
 
     return (
-        <TouchableWithoutFeedback onPress={ () => Keyboard.dismiss() }>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <Background>
-                <Header title='Novo registro' />
+                <Header title='Cadastrar movimentação' />
 
                 <SafeAreaView style={{ marginTop: 14, alignItems: 'center' }}>
+                    <TitleInput>
+                        Qual o nome da movimentação ?
+                    </TitleInput>
                     <Input
-                        placeholder="Descricao desse registro"
+                        placeholder="Ex: Aluguel"
                         value={labelInput}
-                        onChangeText={ (text) => setLabelInput(text) }
+                        onChangeText={(text) => setLabelInput(text)}
                     />
 
+                    <TitleInput>
+                        E o valor ?
+                    </TitleInput>
                     <Input
-                        placeholder="Valor desejado"
+                        placeholder="Ex: 300,00"
                         keyboardType="numeric"
                         value={valueInput}
-                        onChangeText={ (text) => setValueInput(text) }
+                        onChangeText={(text) => setValueInput(text)}
                     />
 
-                    <RegisterTypes type={type} sendTypeChanged={ (item) => setType(item) }/>
+                    <TitleInput>
+                        Qual o tipo da movimentação ?
+                    </TitleInput>
+                    <RegisterTypes type={type} sendTypeChanged={(item) => setType(item)} />
 
                     <SubmitButton onPress={Submit}>
-                        <SubmitText>Registrar</SubmitText>
+                        <SubmitText>Cadastrar</SubmitText>
                     </SubmitButton>
 
                 </SafeAreaView>

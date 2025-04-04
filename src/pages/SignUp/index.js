@@ -1,22 +1,27 @@
 import styled from "styled-components/native";
 import { ActivityIndicator, Platform } from 'react-native'
-import { 
-    Background, 
-    AreaInput, 
-    Input, 
-    SubmitButton, 
-    SubmitText
-  } from '../SignIn/styles';
+import {
+    Background,
+    AreaInput,
+    Input,
+    SubmitButton,
+    SubmitText,
+    Link,
+    LinkText,
+    Logo
+} from '../SignIn/styles';
 import { useContext, useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { AuthContext } from '../../contexts/auth'
 
 export default function SignUp() {
+    const navigation = useNavigation()
     const { signUp, loading } = useContext(AuthContext)
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    function handleSignUp() {        
+    function handleSignUp() {
         signUp(nome, email, password)
     }
 
@@ -26,6 +31,8 @@ export default function SignUp() {
                 behavior={Platform.OS === 'ios' ? 'paddiing' : ''}
                 enabled
             >
+                <Logo
+                    source={require('../../assets/logo.png')} />
                 <Titulo>Crie uma nova conta</Titulo>
                 <AreaInput>
                     <Input
@@ -62,16 +69,20 @@ export default function SignUp() {
                     }
                 </SubmitButton>
 
+                <Link onPress={() => navigation.navigate('SignIn')}>
+                    <LinkText>Ja tem conta ? Entrar</LinkText>
+                </Link>
+
             </Container>
         </Background>
     )
 }
 
 const Titulo = styled.Text`
+    margin-top: -15px;
   font-size: 20px;
-  color:rgb(97, 97, 97);
-  margin-top: 100px;
-  margin-bottom: 60px;
+  color:rgb(65, 64, 64);
+  margin-bottom: 20px;
 `
 
 const Container = styled.KeyboardAvoidingView`

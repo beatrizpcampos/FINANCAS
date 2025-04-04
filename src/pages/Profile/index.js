@@ -18,16 +18,16 @@ export default function Profile() {
 
     return (
         <Container>
-            <Header title="Meu perfil" />
+            <Header title="Minha conta" />
 
-            <Message>Ola, bem vindo de volta</Message>
+            <Message>Ola, bem seja vindo(a) de volta</Message>
 
             <Name numberOfLines={1}>
                {user && user.name}
             </Name>
 
             <NewLink onPress={ () => navigation.navigate('Register') }>
-                <NewText>Fazer Registro</NewText>
+                <NewText>Cadastrar movimentação</NewText>
             </NewLink>
 
             <LogoutButton onPress={ () => signOut() }>

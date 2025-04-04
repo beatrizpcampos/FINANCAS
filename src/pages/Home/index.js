@@ -4,15 +4,16 @@ import { Background, ListBalance, Area, Title, List } from './styles';
 import api from '../../services/api';
 import Header from '../../components/Header';
 import { format } from 'date-fns';
-import { useIsFocused } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import BalanceItem from '../../components/BalanceItem';
-import { Modal, TouchableOpacity } from 'react-native';
+import { Modal, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import ListItem from '../../components/ListItem';
 import CalendarModal from '../../components/CalendarModal';
 
 export default function Home() {
     const isFocused = useIsFocused()
+    const navigation = useNavigation()
     const { signOut, user } = useContext(AuthContext)
     const [listBalance, setListBalance] = useState([])
     const [moviments, setMoviments] = useState([])
@@ -23,7 +24,9 @@ export default function Home() {
         let isActive = true
 
         async function getMovements() {
-            let dateFormated = format(dateMovements, 'dd/MM/yyyy')
+            let date = new Date(dateMovements)
+            let onlyDate = date.valueOf() + date.getTimezoneOffset() * 60 * 1000;
+            let dateFormated = format(onlyDate, 'dd/MM/yyyy')
 
             const receives = await api.get('/receives', {
                 params: {
@@ -54,7 +57,7 @@ export default function Home() {
                 params: {
                     item_id: id
                 }
-            }) 
+            })
 
             setDateMovements(new Date())
         } catch (error) {
@@ -62,13 +65,13 @@ export default function Home() {
         }
     }
 
-    function filterDateMovemenets(dateSelected){
+    function filterDateMovemenets(dateSelected) {
         setDateMovements(dateSelected)
     }
 
     return (
         <Background>
-            <Header title='Transações' />
+            <Header title='Movimentações' />
 
             <ListBalance
                 data={listBalance}
@@ -79,29 +82,36 @@ export default function Home() {
             />
 
             <Area>
-                <TouchableOpacity onPress={ () => setModalVisible(true) }>
-                    <Icon name='event' color='#121212' size={30} />
-                </TouchableOpacity>
                 <Title>
-                    Ultimas movimentacoes
+                    Últimas movimentações
                 </Title>
+
+                <View style={{ flexDirection: 'row' }}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+                        <Icon name='add' color='rgb(65, 64, 64)' size={27} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => setModalVisible(true)}>
+                        <Icon name='event' color='rgb(65, 64, 64)' size={27} />
+                    </TouchableOpacity>
+                </View>
             </Area>
 
             <List
                 data={moviments}
-                keyExtractor={ item => item.id }
-                renderItem={ ({ item }) => <ListItem data={item} deleteItem={deleteItem} /> }
+                keyExtractor={item => item.id}
+                renderItem={({ item }) => <ListItem data={item} deleteItem={deleteItem} />}
                 showsVerticalScrrollIndicator={false}
                 contentContainerStyle={{ paddingBottom: 20 }}
             />
 
             <Modal visible={modalVisible} animationType='fade' transparent={true}>
                 <CalendarModal
-                    setVisible={ () => setModalVisible(false) }
+                    setVisible={() => setModalVisible(false)}
                     handleFilter={filterDateMovemenets}
                 />
             </Modal>
-            
+
         </Background>
     );
 }

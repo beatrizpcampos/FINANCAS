@@ -7,20 +7,21 @@ export default function BalanceItem({ data }){
         if(data.tag === 'saldo'){
             return{
                 label: 'Saldo Atual',
-                color: '3b3dbf'
+                color: '4169E1'
             }
         }else if(data.tag === 'receita'){
             return{
-                label: 'Entradas de hoje',
-                color: '00b94a'
+                label: 'Entradas',
+                color: '3CB371'
             }
         }else{
             return{
-                label: 'Saidas de hoje',
-                color: 'ef463a'
+                label: 'Saidas',
+                color: 'FF6347'
             }
         }
     }, [data])
+
     return(
         <Container bg={labelName.color}>
             <Label>{labelName.label}</Label>

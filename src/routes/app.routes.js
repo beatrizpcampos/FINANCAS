@@ -11,23 +11,25 @@ function AppRoutes() {
         <AppDrawer.Navigator
             drawerContent={ (props) => <CustomDrawer {...props} /> }
             screenOptions={{
+                drawerPosition: "right",
                 headerShown: false,
 
                 drawerStyle: {
-                    backgroundColor: '#fff',
+                    backgroundColor: 'rgb(247, 246, 246)',
                     paddingTop: 20
                 },
 
                 drawerItemStyle:{
                     marginVertical: 10,
-                    borderRadius: 5
+                    marginHorizontal: 15,
+                    borderRadius: 10
                 },
 
-                drawerActiveBackgroundColor: '#3b3dbf',
-                drawerActiveTintColor: '#fff',
+                drawerActiveBackgroundColor: '#4169E1',
+                drawerActiveTintColor: '#ffffff',
 
-                drawerInactiveBackgroundColor: '#f0f2ff',
-                drawerInactiveTintColor: '#121212'
+                drawerInactiveBackgroundColor: '#ffffff',
+                drawerInactiveTintColor: 'rgb(65, 64, 64)'
             }}
         >
             <AppDrawer.Screen

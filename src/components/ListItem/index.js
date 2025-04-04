@@ -29,24 +29,24 @@ export default function ListItem({ data, deleteItem }) {
 
   return (
     <TouchableWithoutFeedback onLongPress={handleDelete}>
-    <Container>
+      <Container>
 
-      <Tipo>
-        <IconView tipo={data.type}>
-          <Icon
-            name={data.type === 'despesa' ? 'arrow-down' : 'arrow-up'}
-            size={20}
-            color="#fff"
-          />
-          <TipoText>{data.type}</TipoText>
-        </IconView>
-      </Tipo>
+        <ValorText>
+          R$ {data.value}
+        </ValorText>
 
-      <ValorText>
-        {data.value}
-      </ValorText>
+        <Tipo>
+          <IconView tipo={data.type}>
+            <Icon
+              name={data.type === 'despesa' ? 'arrow-down' : 'arrow-up'}
+              size={20}
+              color="#fff"
+            />
+            <TipoText>{data.type}</TipoText>
+          </IconView>
+        </Tipo>
 
-    </Container>
+      </Container>
     </TouchableWithoutFeedback>
   )
 }
